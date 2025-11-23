@@ -1,8 +1,8 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from model.base import db
-from model.user import User
-from model.role import Role
+from controllers import db
+from controllers import User
+from controllers import Role
 
 if __name__ == '__main__':
     engine = create_engine('sqlite:///../webadvisor.sqllite')

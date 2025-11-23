@@ -1,9 +1,7 @@
-from sqlalchemy import Column, Integer, String, DateTime, Boolean
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from .associations import user_role_link
-
-#from .base import Base
-from .base import db
+from model.base import db
+from model.associations import user_role_link
 
 class Role(db.Model):
     __tablename__ = 'role'
@@ -19,4 +17,5 @@ class Role(db.Model):
 
 
     def __repr__(self):
-        return f"<Role(id={self.role_id}, name={self.role_name})>"
+        attrs = ", ".join(f"{key}={value!r}" for key, value in vars(self).items())
+        return f"{self.__class__.__name__}({attrs})"

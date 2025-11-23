@@ -1,12 +1,9 @@
 from flask import Flask, request, jsonify, make_response
 from model.base import db
 from model.user import User
-from model.role import Role
 
 app = Flask(__name__)
-# app = Flask(__name__, instance_path=f'\..\{app.root_path}\instance_test')
-# Might be able to change the instance folder, but we'll leave it alone for now.
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../../SQLite_DB.sqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../../SQLite_DB.sqlite' # Fixed
 # app.config['SQLALCHEMY DATABASE_URI'] = 'mysql+pymysql://root: [PASSWORD_REDACTED] @127.0.0.1:3306
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -71,5 +68,4 @@ def delete_user(user_id):
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-
     app.run(debug=True)
