@@ -3,7 +3,7 @@ from model.base import db
 from model.user import User
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../../SQLite_DB.sqlite' # Fixed
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../../SQLite_DB.sqlite'
 # app.config['SQLALCHEMY DATABASE_URI'] = 'mysql+pymysql://root: [PASSWORD_REDACTED] @127.0.0.1:3306
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

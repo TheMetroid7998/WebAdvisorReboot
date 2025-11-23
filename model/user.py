@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Boolean, and_
 from sqlalchemy.orm import relationship, foreign
 from model.base import db
-from model.associations import user_role_link, user_course_link
+from model.associations import user_role_link, course_user_link
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -15,18 +15,19 @@ class User(db.Model):
     is_student = Column(Boolean, nullable=False)
 
     roles = relationship('Role', secondary=user_role_link, back_populates='users')
+    courses = relationship('Course', secondary=course_user_link, back_populates='courses')
     # extra arguments had to be defined because the Course table is uniquely difficult in that
         # it has a composite primary key and multiple linking foreign keys.
     # the course model has more documentation btw
-    courses = relationship(
+    '''courses = relationship(
         "Course",
-        secondary=user_course_link,
-        primaryjoin=lambda: User.user_id == foreign(user_course_link.c.user_id),
+        secondary=course_user_link,
+        primaryjoin=lambda: User.user_id == foreign(course_user_link.c.user_id),
         secondaryjoin=lambda: (
-                (foreign(user_course_link.c.course_id) == db.metadata.tables["course"].c.course_id) &
-                (foreign(user_course_link.c.section_id) == db.metadata.tables["course"].c.section_id)
+                (foreign(course_user_link.c.course_id) == db.metadata.tables["course"].c.course_id) &
+                (foreign(course_user_link.c.section_id) == db.metadata.tables["course"].c.section_id)
         ),
-        back_populates='users')
+        back_populates='users')'''
 
     def json(self):
         return {'id': self.user_id,

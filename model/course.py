@@ -1,13 +1,14 @@
 from sqlalchemy import Column, Integer, String, Boolean, and_
 from sqlalchemy.orm import relationship, foreign
 from model.base import db
-from model.associations import user_course_link
+from model.associations import course_user_link
 
 class Course(db.Model):
     __tablename__ = 'course'
 
-    course_id = Column(Integer, primary_key=True)
-    section_id = Column(Integer, primary_key=True)
+    class_id = Column(Integer, autoincrement=True, primary_key=True)
+    course_id = Column(String(10), nullable=False)
+    section_id = Column(Integer, nullable=False)
     course_title = Column(String(100), nullable=False)
     department = Column(String(50), nullable=False)
     campus = Column(String(20), nullable=False)
@@ -19,9 +20,10 @@ class Course(db.Model):
     # enroll_status should support values of 0, 1, 2.
     credits = Column(Integer, nullable=False)
 
-    users = relationship(
+    users = relationship('User', secondary=course_user_link, back_populates='courses')
+    '''users = relationship(
         "User",
-        secondary=user_course_link,
+        secondary=course_user_link,
         # lambda and absolute references added to fix PyCharm type checker complaining.
         # tldr: Python checks the datatypes and evaluates the secondaryjoin too early
             # and then defines it as a boolean instead of a SQLAlchemy boolean SQL expression.
@@ -33,14 +35,15 @@ class Course(db.Model):
                 # therefore, '.c' behaves like a dictionary mapping and an attributable object
         # I also added a 'type: ignore' flag to get PyCharm to actually shut up about it. It's hacky, but it works.
         primaryjoin=lambda: (
-                (Course.course_id == foreign(user_course_link.c.course_id)) &
-                (Course.section_id == foreign(user_course_link.c.section_id))
+                (Course.course_id == foreign(course_user_link.c.course_id)) &
+                (Course.section_id == foreign(course_user_link.c.section_id))
         ),
-        secondaryjoin=lambda: db.metadata.tables["user"].c.user_id == foreign(user_course_link.c.user_id), # type: ignore
-        back_populates='courses')
+        secondaryjoin=lambda: db.metadata.tables["user"].c.user_id == foreign(course_user_link.c.user_id), # type: ignore
+        back_populates='courses')'''
 
     def json(self):
-        return {'course_id': self.course_id,
+        return {'class_id': self.class_id,
+                'course_id': self.course_id,
                 'section_id': self.section_id,
                 'course_title': self.course_title,
                 'department': self.department,
