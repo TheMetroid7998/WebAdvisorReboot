@@ -1,11 +1,12 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from controllers import db
-from controllers import User
-from controllers import Role
+from model.base import db
+from model.user import User
+from model.role import Role
+from model.course import Course
 
 if __name__ == '__main__':
-    engine = create_engine('sqlite:///../webadvisor.sqllite')
+    engine = create_engine('sqlite:///../../SQLite_DB.sqlite')
 
     # Create all tables if they don't exist
     db.Model.metadata.create_all(engine)
@@ -18,4 +19,6 @@ if __name__ == '__main__':
     roles = user.roles
     print(roles)
     user.user_email = 'junk@nowhere.com'
+    courses = user.courses
+    print(courses)
     session.commit()

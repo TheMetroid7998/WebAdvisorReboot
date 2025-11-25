@@ -20,7 +20,12 @@ def create_tables():
 @app.route('/users', methods=['POST'])
 def create_user():
     data = request.get_json()
-    new_user = User(user_username=data.get('username', None),
+    new_user = User(
+                    # User ID is required while we are using SQLite
+                    # because AUTO_INCREMENT is not supported in SQLite.
+                    # We will need to remove this when switching to MySQL.
+                    user_id=data.get('user_id', None),
+                    user_username=data.get('username', None),
                     user_first_name=data.get('first_name', None),
                     user_last_name=data.get('last_name', None),
                     user_email=data.get('email', None),
@@ -48,6 +53,8 @@ def get_user(user_id):
 def update_user(user_id):
     user = User.query.get_or_404(user_id)
     data = request.get_json()
+    # see create user method for why USER_ID exists here
+    user.user_id = data.get('user_id', user.user_id)
     user.user_username = data.get('username', user.user_username)
     user.user_first_name = data.get('first_name', user.user_first_name)
     user.user_last_name = data.get('last_name', user.user_last_name)

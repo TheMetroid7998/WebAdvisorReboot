@@ -16,18 +16,6 @@ class User(db.Model):
 
     roles = relationship('Role', secondary=user_role_link, back_populates='users')
     courses = relationship('Course', secondary=course_user_link, back_populates='users')
-    # extra arguments had to be defined because the Course table is uniquely difficult in that
-        # it has a composite primary key and multiple linking foreign keys.
-    # the course model has more documentation btw
-    '''courses = relationship(
-        "Course",
-        secondary=course_user_link,
-        primaryjoin=lambda: User.user_id == foreign(course_user_link.c.user_id),
-        secondaryjoin=lambda: (
-                (foreign(course_user_link.c.course_id) == db.metadata.tables["course"].c.course_id) &
-                (foreign(course_user_link.c.section_id) == db.metadata.tables["course"].c.section_id)
-        ),
-        back_populates='users')'''
 
     def json(self):
         return {'id': self.user_id,
