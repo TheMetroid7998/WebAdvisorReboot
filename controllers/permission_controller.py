@@ -15,13 +15,13 @@ def create_tables():
 
 # --- C[R]UD Operations [READ ONLY] ---
 
-# Read all roles (GET)
+# Read all permissions (GET)
 @app.route('/permissions', methods=['GET'])
 def get_permissions():
     permissions = Permission.query.all()
     return make_response(jsonify([permission.json() for permission in permissions]), 200)
 
-# Read a single role by ID (GET)
+# Read a single permission by ID (GET)
 @app.route('/permissions/<int:perm_id>', methods=['GET'])
 def get_permission(perm_id):
     permission = Permission.query.get_or_404(perm_id)

@@ -15,13 +15,13 @@ def create_tables():
 
 # --- C[R]UD Operations [READ ONLY] ---
 
-# Read all roles (GET)
+# Read all operations (GET)
 @app.route('/operations', methods=['GET'])
 def get_operations():
     operations = Operation.query.all()
     return make_response(jsonify([operation.json() for operation in operations]), 200)
 
-# Read a single role by ID (GET)
+# Read a single operation by ID (GET)
 @app.route('/operations/<int:perm_id>', methods=['GET'])
 def get_operation(perm_id):
     operation = Operation.query.get_or_404(perm_id)

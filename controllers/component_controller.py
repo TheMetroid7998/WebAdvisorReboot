@@ -15,13 +15,13 @@ def create_tables():
 
 # --- C[R]UD Operations [READ ONLY] ---
 
-# Read all roles (GET)
+# Read all components (GET)
 @app.route('/components', methods=['GET'])
 def get_components():
     components = Component.query.all()
     return make_response(jsonify([component.json() for component in components]), 200)
 
-# Read a single role by ID (GET)
+# Read a single component by ID (GET)
 @app.route('/components/<int:perm_id>', methods=['GET'])
 def get_component(perm_id):
     component = Component.query.get_or_404(perm_id)
