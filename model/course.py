@@ -19,7 +19,7 @@ class Course(db.Model):
     # enroll_status should support values of 0, 1, 2.
     credits = Column(Integer, nullable=False)
 
-    users = relationship("User", secondary=user_course_link, back_populates='courses')
+    users = relationship("User", secondary=course_user_link, back_populates='courses')
 
     def json(self):
         return {'course_id': self.course_id,
