@@ -6,8 +6,9 @@ from model.associations import course_user_link
 class Course(db.Model):
     __tablename__ = 'course'
 
-    course_id = Column(Integer, primary_key=True)
-    section_id = Column(Integer, primary_key=True)
+    class_id = Column(Integer, primary_key=True)
+    course_id = Column(Integer, primary_key=False)
+    section_id = Column(Integer, primary_key=False)
     course_title = Column(String(100), nullable=False)
     department = Column(String(50), nullable=False)
     campus = Column(String(20), nullable=False)
@@ -22,7 +23,8 @@ class Course(db.Model):
     users = relationship("User", secondary=course_user_link, back_populates='courses')
 
     def json(self):
-        return {'course_id': self.course_id,
+        return {'class_id': self.class_id,
+                'course_id': self.course_id,
                 'section_id': self.section_id,
                 'course_title': self.course_title,
                 'department': self.department,
