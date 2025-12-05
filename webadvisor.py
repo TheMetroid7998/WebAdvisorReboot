@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import render_template
 from model.base import db
 from controllers.user_controller import user_bp
 from controllers.role_controller import role_bp
@@ -25,6 +26,12 @@ app.register_blueprint(comp_bp)
 def create_tables():
     with app.app_context():
         db.create_all()
+
+@app.route("/")
+def hello():
+    message = "Hello, World"
+    return render_template('base.html',
+                           message=message)
 
 if __name__ == '__main__':
     with app.app_context():
