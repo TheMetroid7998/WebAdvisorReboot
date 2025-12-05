@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from model.base import db
-from model.associations import user_role_link#,role_permission_link
+from model.associations import user_role_link,role_permission_link
 
 class Role(db.Model):
     __tablename__ = 'role'
@@ -10,6 +10,7 @@ class Role(db.Model):
     role_name = Column(String, unique=True, nullable=False)
 
     users = relationship('User', secondary=user_role_link, back_populates='roles')
+    permissions = relationship('Permission', secondary=role_permission_link, back_populates='roles')
 
     def json(self):
         return {'id': self.role_id,
