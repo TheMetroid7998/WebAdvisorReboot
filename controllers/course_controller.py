@@ -1,21 +1,14 @@
-from flask import Flask, request, jsonify, make_response
+from flask import Blueprint, request, jsonify, make_response
 from model.base import db
 from model.course import Course
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../../SQLite_DB.sqlite'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Redwo0d$@127.0.0.1:3306/webadvisor_reboot'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db.init_app(app)
-
-def create_tables():
-    with app.app_context():
-        db.create_all()
+course_bp = Blueprint('course', __name__,
+                    template_folder='templates',
+                    static_folder='static', url_prefix='/course')
 
 # --- CRUD Operations ---
 # Create a course (POST)
-@app.route('/courses', methods=['POST'])
+@course_bp.route('/create', methods=['POST'])
 def create_course():
     data = request.get_json()
     new_course = Course(class_id=data.get('class_id', None),
@@ -35,19 +28,19 @@ def create_course():
     return make_response(jsonify({'message': 'course created', 'course': new_course.json()}), 201)
 
 # Read all courses (GET)
-@app.route('/courses', methods=['GET'])
+@course_bp.route('/all', methods=['GET'])
 def get_courses():
     courses = Course.query.all()
     return make_response(jsonify([course.json() for course in courses]), 200)
 
 # Read a single course by ID (GET)
-@app.route('/courses/<int:class_id>', methods=['GET'])
+@course_bp.route('/<int:class_id>', methods=['GET'])
 def get_course(class_id):
     course = Course.query.get_or_404(class_id)
     return make_response(jsonify({'course': course.json()}), 200)
 
 # Update a course by ID (PUT/PATCH)
-@app.route('/courses/<int:class_id>', methods=['PUT'])
+@course_bp.route('/<int:class_id>', methods=['PUT'])
 def update_course(class_id):
     course = Course.query.get_or_404(class_id)
     data = request.get_json()
@@ -66,14 +59,9 @@ def update_course(class_id):
     return make_response(jsonify({'message': 'course updated', 'course': course.json()}), 200)
 
 # Delete a course by ID (DELETE)
-@app.route('/courses/<int:class_id>', methods=['DELETE'])
+@course_bp.route('/<int:class_id>', methods=['DELETE'])
 def delete_course(class_id):
     course = Course.query.get_or_404(class_id)
     db.session.delete(course)
     db.session.commit()
     return make_response(jsonify({'message': 'class deleted'}), 200)
-
-if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-    app.run(debug=True)

@@ -1,23 +1,14 @@
-from flask import Flask, request, jsonify, make_response
+from flask import Blueprint, request, jsonify, make_response
 from model.base import db
 from model.user import User
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../../SQLite_DB.sqlite'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Redwo0d$@127.0.0.1:3306/webadvisor_reboot'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# Initialize the db instance with the Flask app
-db.init_app(app)
-
-# Create the database tables within the application context
-def create_tables():
-    with app.app_context():
-        db.create_all()
+user_bp = Blueprint('user', __name__,
+                    template_folder='templates',
+                    static_folder='static', url_prefix='/user')
 
 # --- CRUD Operations ---
 # Create a user (POST)
-@app.route('/users', methods=['POST'])
+@user_bp.route('/create', methods=['POST'])
 def create_user():
     data = request.get_json()
     new_user = User(
@@ -37,19 +28,19 @@ def create_user():
     return make_response(jsonify({'message': 'user created', 'user': new_user.json()}), 201)
 
 # Read all users (GET)
-@app.route('/users', methods=['GET'])
+@user_bp.route('/all', methods=['GET'])
 def get_users():
     users = User.query.all()
     return make_response(jsonify([user.json() for user in users]), 200)
 
 # Read a single user by ID (GET)
-@app.route('/users/<int:user_id>', methods=['GET'])
+@user_bp.route('/<int:user_id>', methods=['GET'])
 def get_user(user_id):
     user = User.query.get_or_404(user_id)
     return make_response(jsonify({'user': user.json()}), 200)
 
 # Update a user by ID (PUT/PATCH)
-@app.route('/users/<int:user_id>', methods=['PUT'])
+@user_bp.route('/<int:user_id>', methods=['PUT'])
 def update_user(user_id):
     user = User.query.get_or_404(user_id)
     data = request.get_json()
@@ -65,14 +56,9 @@ def update_user(user_id):
     return make_response(jsonify({'message': 'user updated', 'user': user.json()}), 200)
 
 # Delete a user by ID (DELETE)
-@app.route('/users/<int:user_id>', methods=['DELETE'])
+@user_bp.route('/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     user = User.query.get_or_404(user_id)
     db.session.delete(user)
     db.session.commit()
     return make_response(jsonify({'message': 'user deleted'}), 200)
-
-if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-    app.run(debug=True)
