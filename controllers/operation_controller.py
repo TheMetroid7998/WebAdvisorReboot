@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, make_response#, request
 from model.operation import Operation
 
-op_bp = Blueprint('operation', __name__, '/op')
+op_bp = Blueprint('operation', __name__, url_prefix='/op')
 
 # --- C[R]UD Operations [READ ONLY] ---
 
