@@ -25,5 +25,6 @@ webadvisorreboot/
 |
 ├── DB_Documentation.md
 ├── DB_ERD_Mermaid.mmd
+├── Project_Structure.md
 ├── README.md
 └── requirements.txt
