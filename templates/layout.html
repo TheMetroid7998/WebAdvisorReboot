@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>WebAdvisorReboot — Dashboard</title>
+  <title>{% block title %}WebAdvisorReboot — Dashboard{% endblock %}</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -64,25 +64,10 @@
         <button class="btn" type="button" onclick="alert('Search demo')">Search</button>
       </div>
 
-      <div class="widgets">
-        <section class="card" aria-labelledby="ann-head">
-          <h2 id="ann-head">Announcements</h2>
-          <ul class="announcements" aria-live="polite">
-            <li><strong>Dec 18</strong> — Project presentations (you should not see me).</li>
-            <li><strong>Nov 30</strong> — Scheduled maintenance: portal unavailable 11pm–7am.</li>
-            <li><strong>Dec 19</strong> — Final day of the semester.</li>
-          </ul>
-        </section>
-
-        <section class="card" aria-labelledby="tools-head">
-          <h2 id="tools-head">Quick Tools</h2>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <button class="btn secondary" type="button" onclick="alert('View schedule')">My Schedule</button>
-            <button class="btn secondary" type="button" onclick="alert('Register classes')">Register</button>
-            <button class="btn secondary" type="button" onclick="alert('View account')">Accounts & Billing</button>
-          </div>
-        </section>
-      </div>
+      {% block content %}
+      <!-- Default content goes here if nothing specific is provided -->
+      <p>Please select an option from the navigation.</p>
+      {% endblock %}
 
       <section class="card" aria-labelledby="help-head">
         <h2 id="help-head">Helpful links</h2>

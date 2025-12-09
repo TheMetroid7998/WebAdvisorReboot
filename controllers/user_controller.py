@@ -1,10 +1,9 @@
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, request, jsonify, make_response, render_template
 from model.base import db
 from model.user import User
 
 user_bp = Blueprint('user', __name__,
-                    template_folder='templates',
-                    static_folder='static', url_prefix='/user')
+                    url_prefix='/user')
 
 # --- CRUD Operations ---
 # Create a user (POST)
@@ -31,7 +30,8 @@ def create_user():
 @user_bp.route('/all', methods=['GET'])
 def get_users():
     users = User.query.all()
-    return make_response(jsonify([user.json() for user in users]), 200)
+    return render_template('user/list.html', users=[user for user in users])
+    #return make_response(jsonify([user.json() for user in users]), 200)
 
 # Read a single user by ID (GET)
 @user_bp.route('/<int:user_id>', methods=['GET'])
