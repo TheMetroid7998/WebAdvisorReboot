@@ -8,7 +8,7 @@ webadvisorreboot/
 |
 ├── static/
 |   ├── logo.png
-|   ├── main.css
+|   ├── style.css
 |   └── generic.js
 |
 ├── templates/

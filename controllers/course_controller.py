@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, make_response
 from model.base import db
 from model.course import Course
+# from model.user import User
 
 course_bp = Blueprint('course', __name__,
                     template_folder='templates',
@@ -65,3 +66,16 @@ def delete_course(class_id):
     db.session.delete(course)
     db.session.commit()
     return make_response(jsonify({'message': 'class deleted'}), 200)
+
+
+# Add a user by username to a class by id
+#@course_bp.route('/<int:class_id>/add/<username>', methods=['GET'])
+#def add_user_to_role(username, role_id):
+#    user = User.query.filter_by(user_username=username).first()
+#    # Need to query the model/table correctly, copied from role controller
+#    course = Course.query.filter_by(class_id=class_id)
+#    user.roles.append(course)
+#    db.session.add(user)
+#    db.session.commit()
+
+#    return make_response(jsonify({'r': role_id, 'un': username}))
