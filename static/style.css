@@ -123,7 +123,7 @@
       .widgets{grid-template-columns:1fr}
     }
 
-/* Adding List Table CSS */
+/* List Table CSS */
 .model-list-container {
     background-color: #fff;
     border-radius: 8px;
@@ -136,7 +136,7 @@
 /* Use CSS Grid on every 'model-item' (both header and data rows) */
 .model-item {
     display: grid;
-    /* Define columns for ID, Username, Full Name, Email */
+    /* Define columns for Model Attributes */
     grid-template-columns: 50px 150px 1fr 2fr;
     padding: 12px 20px;
     border-bottom: 1px solid #ddd;
@@ -164,4 +164,4 @@
 
 /* Style individual data cells (optional, just for clarity) */
 .model-id { font-weight: bold; }
-.model-email { color: #007BFF; }
+.model-name { color: #007BFF; }

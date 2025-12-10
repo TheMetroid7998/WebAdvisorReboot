@@ -30,7 +30,7 @@ def create_course():
 @course_bp.route('/all', methods=['GET'])
 def get_courses():
     courses = Course.query.all()
-    return render_template('course/list.html', courses=[course for course in courses])
+    return render_template('course/list_all.html', courses=[course for course in courses])
     # return make_response(jsonify([course.json() for course in courses]), 200)
 
 # Read a single course by ID (GET)

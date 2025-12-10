@@ -1,11 +1,9 @@
-from flask import Blueprint, jsonify, make_response
+from flask import Blueprint, jsonify, make_response, render_template
 from model.base import db
 from model.role import Role
 from model.user import User
 
-role_bp = Blueprint('role', __name__,
-                    template_folder='templates',
-                    static_folder='static', url_prefix='/role')
+role_bp = Blueprint('role', __name__, url_prefix='/role')
 
 # --- C[R]UD Operations [READ ONLY] ---
 
@@ -13,7 +11,8 @@ role_bp = Blueprint('role', __name__,
 @role_bp.route('/all', methods=['GET'])
 def get_roles():
     roles = Role.query.all()
-    return make_response(jsonify([role.json() for role in roles]), 200)
+    return render_template('role/list_all.html', roles=[role for role in roles])
+    #return make_response(jsonify([role.json() for role in roles]), 200)
 
 # Read a single role by ID (GET)
 @role_bp.route('/<int:role_id>', methods=['GET'])

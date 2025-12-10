@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block title %}List All Roles{% endblock %}
+
+{% block content %}
+{% for role in roles -%}
+<div class="model-item data-row">
+  <div class="model-id">{{ role.role_id }}</div>
+  <div class="model-name">{{ role.role_name }}</div>
+</div>
+{% endfor -%}
+{% endblock %}

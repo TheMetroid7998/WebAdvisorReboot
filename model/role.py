@@ -6,7 +6,7 @@ from model.associations import user_role_link,role_permission_link
 class Role(db.Model):
     __tablename__ = 'role'
 
-    role_id = Column(Integer, primary_key=True, autoincrement=True)
+    role_id = Column(Integer, primary_key=True)
     role_name = Column(String, unique=True, nullable=False)
 
     users = relationship('User', secondary=user_role_link, back_populates='roles')

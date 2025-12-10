@@ -2,8 +2,7 @@ from flask import Blueprint, request, jsonify, make_response, render_template
 from model.base import db
 from model.user import User
 
-user_bp = Blueprint('user', __name__,
-                    url_prefix='/user')
+user_bp = Blueprint('user', __name__, url_prefix='/user')
 
 # --- CRUD Operations ---
 # Create a user (POST)
@@ -30,7 +29,7 @@ def create_user():
 @user_bp.route('/all', methods=['GET'])
 def get_users():
     users = User.query.all()
-    return render_template('user/list.html', users=[user for user in users])
+    return render_template('user/list_all.html', users=[user for user in users])
     #return make_response(jsonify([user.json() for user in users]), 200)
 
 # Read a single user by ID (GET)
