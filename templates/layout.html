@@ -8,9 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Add the <link> below to any future pages, and they'll all look the same! -->
+
     <link rel="stylesheet" href="../static/style.css"/>
 </head>
+
+<!-- Initialize Dark Mode Toggle -->
+<script src="../static/darkmode.js" type="text/javascript">
+
+</script>
 
 <body>
 <main class="wrap" role="main">
@@ -69,6 +74,11 @@
         <input type="search" placeholder="Search courses, schedules, help..." aria-label="Search">
         <button class="btn" type="button" onclick="alert('Search demo')">Search</button>
     </div>
+
+    <button id="theme-toggle" class="btn secondary" type="button" style="margin-top:10px;">
+        Toggle Dark Mode
+    </button>
+
     </aside>
 
     <!-- right column -->
@@ -95,7 +105,7 @@
       </section>
       {% endblock %}
       <footer class="footer" role="contentinfo">
-        © <span id="year"></span> College of the Redwoods · <a href="#" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="#" style="color:inherit;text-decoration:underline">Accessibility</a> · <a href="#" style="color:inherit;text-decoration:underline">Report a bug or issue</a>
+          © <span id="year"></span> College of the Redwoods · <a href="#" style="color:inherit;text-decoration:underline">Privacy</a> · <a href="#" style="color:inherit;text-decoration:underline">Accessibility</a> · <a href="#" style="color:inherit;text-decoration:underline">Report a bug or issue</a>
       </footer>
     </section>
   </main>
