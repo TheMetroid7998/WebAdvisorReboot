@@ -1,0 +1,48 @@
+{% extends 'layout_ai_v2.html' %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+
+<h2>Edit Profile</h2>
+
+<div class="card">
+<form id="profileForm">
+
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" value="{{ user.user_username }}" readonly>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" value="{{ user.user_email }}">
+    </div>
+
+    <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input type="text" id="first_name" value="{{ user.user_first_name }}">
+    </div>
+
+    <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input type="text" id="last_name" value="{{ user.user_last_name }}">
+    </div>
+
+    <div class="form-group">
+        <label>Roles</label>
+        <label><input type="checkbox" id="is_prof" {% if user.is_prof %}checked{% endif %}> Professor</label><br>
+        <label><input type="checkbox" id="is_student" {% if user.is_student %}checked{% endif %}> Student</label>
+    </div>
+
+    <input type="hidden" id="id" value="{{ user.user_id }}">
+
+    <button class="btn" type="button" id="saveButton">Save Changes</button>
+</form>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='save_profile.js') }}"></script>
+{% endblock %}

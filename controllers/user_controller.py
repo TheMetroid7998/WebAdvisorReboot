@@ -29,14 +29,14 @@ def create_user():
 @user_bp.route('/all', methods=['GET'])
 def get_users():
     users = User.query.all()
-    return render_template('user/list_all.html', users=[user for user in users])
+    return render_template('user/list_all_ai.html', users=[user for user in users])
     #return make_response(jsonify([user.json() for user in users]), 200)
 
 # Read a single user by ID (GET)
 @user_bp.route('/<int:user_id>', methods=['GET'])
 def get_user(user_id):
     user = User.query.get_or_404(user_id)
-    return render_template('user/profile.html', user=user)
+    return render_template('user/profile_ai.html', user=user)
     #return make_response(jsonify({'user': user.json()}), 200)
 
 # Update a user by ID (PUT/PATCH)

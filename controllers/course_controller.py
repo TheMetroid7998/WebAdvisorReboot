@@ -10,18 +10,23 @@ course_bp = Blueprint('course', __name__, url_prefix='/course')
 @course_bp.route('/create', methods=['POST'])
 def create_course():
     data = request.get_json()
-    new_course = Course(class_id=data.get('class_id', None),
-                        course_id=data.get('course_id', None),
-                        section_id=data.get('section_id', None),
-                        course_title=data.get('course_title', None),
-                        department=data.get('department', None),
-                        campus=data.get('campus', None),
-                        term=data.get('term', None),
-                        days_offered=data.get('days_offered', None),
-                        times_offered=data.get('times_offered', None),
-                        enroll_status=data.get('enroll_status', None),
-                        credits=data.get('credits', None),
-                        )
+
+    class_id =data.get('class_id', None)
+    course_id = data.get('course_id', None)
+    section_id = data.get('section_id', None)
+    course_title = data.get('course_title', None)
+    department = data.get('department', None)
+    campus = data.get('campus', None)
+    term = data.get('term', None)
+    days_offered = data.get('days_offered', None)
+    times_offered = data.get('times_offered', None)
+    enroll_status = data.get('enroll_status', None)
+    credits_ = data.get('credits', None)
+
+    new_course = Course(class_id=class_id,course_id=course_id,section_id=section_id,course_title=course_title,
+                        department=department, campus=campus, term=term, days_offered=days_offered,
+                        times_offered=times_offered, enroll_status=enroll_status, credits=credits_)
+
     db.session.add(new_course)
     db.session.commit()
     return make_response(jsonify({'message': 'course created', 'course': new_course.json()}), 201)
@@ -30,7 +35,7 @@ def create_course():
 @course_bp.route('/all', methods=['GET'])
 def get_courses():
     courses = Course.query.all()
-    return render_template('course/list_all.html', courses=[course for course in courses])
+    return render_template('course/list_all_ai.html', courses=[course for course in courses])
     # return make_response(jsonify([course.json() for course in courses]), 200)
 
 # Read a single course by ID (GET)

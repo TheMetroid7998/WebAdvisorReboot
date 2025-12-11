@@ -1,0 +1,29 @@
+{% extends 'layout_ai_v2.html' %}
+
+{% block title %}List of Users{% endblock %}
+
+{% block content %}
+
+<div class="model-list-container">
+
+  <!-- Header Row -->
+  <div class="model-item user header-row">
+    <div>User ID</div>
+    <div>Username</div>
+    <div>Full Name</div>
+    <div>Email</div>
+  </div>
+
+  <!-- Data Rows -->
+  {% for user in users %}
+  <div class="model-item user data-row">
+    <div>{{ user.user_id }}</div>
+    <div>{{ user.user_username }}</div>
+    <div>{{ user.user_first_name }} {{ user.user_last_name }}</div>
+    <div>{{ user.user_email }}</div>
+  </div>
+  {% endfor %}
+
+</div>
+
+{% endblock %}
