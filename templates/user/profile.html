@@ -1,4 +1,4 @@
-{% extends 'layout_ai_v2.html' %}
+{% extends 'layout.html' %}
 
 {% block title %}Edit User Profile{% endblock %}
 
@@ -6,46 +6,48 @@
 
 <h2>Edit Profile</h2>
 
-<div class="card profile">
+<div class="card profile" style="width: 50%">
 <form id="profileForm">
 
     <div class="form-group">
-        <label type="title" for="user_id">Student ID: </label>
-        <label type="input" id="user_id">{{ user.user_id }}</label>
+        <label type="title" for="user_id">User ID: </label>
+        <input type="text" id="user_id" name="id" style="color: var(--muted-2); border: none; padding: 8px; font-size: 16px;" value="{{ user.user_id }}" readonly>
     </div>
 
     <div class="form-group">
         <label type="title" for="username">Username: </label>
-        <label type="input" id="username">{{ user.user_username }}</label>
+        <input type="text" id="username" name="username" style="color: var(--muted-2); border: none; padding: 8px; font-size: 16px;" value="{{ user.user_username }}" readonly>
     </div>
 
     <div class="form-group">
         <label type="title" for="email">Email: </label>
-        <input type="email" id="email" value="{{ user.user_email }}">
+        <input type="email" id="email" name="email" value="{{ user.user_email }}">
     </div>
 
     <div class="form-group">
         <label type="title" for="first_name">First Name: </label>
-        <input type="text" id="first_name" value="{{ user.user_first_name }}">
+        <input type="text" id="first_name" name="first_name" value="{{ user.user_first_name }}">
     </div>
 
     <div class="form-group">
         <label type="title" for="last_name">Last Name: </label>
-        <input type="text" id="last_name" value="{{ user.user_last_name }}">
+        <input type="text" id="last_name" name="last_name" value="{{ user.user_last_name }}">
     </div>
 
     <div class="form-group">
         <label type="title">User Roles: </label>
-        <label type="checkbox" ><input type="checkbox" id="is_prof" {% if user.is_prof %} checked {% endif %}> Professor</label>
-        <label type="checkbox" ><input type="checkbox" id="is_student" {% if user.is_student %} checked {% endif %}> Student</label>
+        <label type="checkbox" ><input type="checkbox" id="is_prof" name="is_prof" {% if user.is_prof %} checked {% endif %}> Professor</label>
+        <label type="checkbox" ><input type="checkbox" id="is_student" name="is_student" {% if user.is_student %} checked {% endif %}> Student</label>
     </div>
 
-    <button class="btn" type="button" id="saveButton" style="width: 50%;">Save Changes</button>
+    <button class="btn" type="button" id="saveButton">Save Changes</button>
 </form>
 </div>
-
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='save_profile.js') }}"></script>
+
+    <!-- Extends the script block in layout.html instead of overwriting it. -->
+    {{ super() }}
+    <script src="{{ url_for('static', filename='save_profile.js') }}"></script>
 {% endblock %}

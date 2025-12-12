@@ -28,7 +28,7 @@ def create_tables():
 
 @app.route('/')
 def index():
-    return render_template('layout_ai_v2.html')
+    return render_template('layout.html')
 
 @app.errorhandler(404)
 def page_not_found(e):

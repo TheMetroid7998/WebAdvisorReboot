@@ -13,16 +13,17 @@ html, body {
             THEME TOKENS — LIGHT MODE (default)
 ------------------------------------------------------------ */
 :root{
-  --bg: #f5f7fa;
+  --bg: #fdfbf5;
   --card-bg: #ffffff;
-  --gradient: linear-gradient(135deg,#eef6ff,#f8fbff);
+  --gradient: linear-gradient(135deg,#fdecef,#f8fbff);
   --text: #111827;
-  --accent: #0066ff;
+  --accent: #8E001C;
   --muted: #6b7280;
   --muted-2: #3c4248;
   --border: #e7eefb;
   --shadow-sm: 0 2px 6px rgba(15,23,36,0.06);
 
+  /* Theme Agnostic Formatting */
   --radius: 6px;
   --max-width: 1300px;
   --page-padding: 40px;
@@ -32,11 +33,11 @@ html, body {
             DARK MODE — <html data-theme="dark">
 ------------------------------------------------------------ */
 html[data-theme="dark"]{
-  --bg: #0f1720;
-  --card-bg: #111216;
-  --gradient: linear-gradient(135deg,#171718,#1f242a);
+  --bg: #19070c;
+  --card-bg: #161111;
+  --gradient: linear-gradient(135deg,#181717,#2a1f1f);
   --text: #e6eef8;
-  --accent: #4c9aff;
+  --accent: #a80022;
   --muted: #9aa8bb;
   --muted-2: #bcc1c7;
   --border: #21272f;
@@ -94,7 +95,7 @@ body{
 
 .logo{
   width: 44px; height: 44px; border-radius: 8px;
-  background: linear-gradient(135deg,var(--accent),#2a9df4);
+  background: linear-gradient(135deg,var(--accent),#d42d47);
   display: flex; align-items: center; justify-content: center;
   color: #fff; font-weight: 700; font-size: 16px;
 }
@@ -245,10 +246,7 @@ select {
   color: var(--text);
   margin: 0 10px 0 0;
 }
-.form-group label[type="input"] {
-  font-size: 14px;
-  color: var(--muted-2);
-}
+
 .form-group label[type="checkbox"]{
   padding: 10px 12px;
   color: var(--text);
@@ -274,9 +272,10 @@ select {
 }
 
 /* Custom Column Definitions */
+.model-list-container.short{width: 50%}
 .model-item.course{ grid-template-columns: 1fr 1fr 3fr 3fr 1.5fr 0.5fr; }
 .model-item.user{ grid-template-columns: 1fr 1.5fr 2fr 2.5fr; }
-.model_item.role{ grid-template-columns: 1fr 2fr; }
+.model-item.role{ grid-template-columns: 1fr 2fr; }
 
 /* Table Column Headers */
 .header-row{
