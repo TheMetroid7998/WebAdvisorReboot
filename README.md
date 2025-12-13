@@ -17,7 +17,10 @@ An experimental remake of Ellucian WebAdvisor in Python utilizing Flask, SQLAlch
 - Started writing CRUD controllers and User Stories.
 
 
-### **[ACTIVE]** Sprint 5: 11/22 - 12/13
+### Sprint 5: 11/22 - 12/13
 - Flask/SQLAlchemy models and controllers written and unified using blueprints.
-- _Write CSS and HTML documents for web interface._
+- Wrote CSS and HTML documents for web interface.
+- Wrote JavaScript scripts to add key functionalities to certain pages.
+
+### **[ACTIVE]** Sprint 6: 12/14 - 12/18
 - _Implement Role Based Access Control and test with dummy data._
