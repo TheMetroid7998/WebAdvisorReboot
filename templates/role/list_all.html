@@ -1,10 +1,12 @@
-{% extends 'layout_ai_v2.html' %}
+{% extends 'layout.html' %}
 
 {% block title %}List of Roles{% endblock %}
 
 {% block content %}
 
-<div class="model-list-container">
+<h1>List of All Roles</h1>
+
+<div class="model-list-container short">
 
   <!-- Header Row -->
   <div class="model-item role header-row">
@@ -21,5 +23,4 @@
   {% endfor %}
 
 </div>
-
 {% endblock %}
