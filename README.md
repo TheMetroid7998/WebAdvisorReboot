@@ -1,5 +1,7 @@
 # WebAdvisor Reboot
-An experimental remake of Ellucian WebAdvisor in Python utilizing Flask, SQLAlchemy, SQLite, and MySQL.
+An experimental remake of WebAdvisor in Python utilizing Flask, SQLAlchemy, SQLite, and MySQL.
+
+## This project has been terminated due to time constraints. No further development is anticipated.
 
 ### Sprint 1: 08/30 - 09/16
 - No Development
@@ -22,5 +24,10 @@ An experimental remake of Ellucian WebAdvisor in Python utilizing Flask, SQLAlch
 - Wrote CSS and HTML documents for web interface.
 - Wrote JavaScript scripts to add key functionalities to certain pages.
 
-### **[ACTIVE]** Sprint 6: 12/14 - 12/18
-- _Implement Role Based Access Control and test with dummy data._
+### Sprint 6: 12/14 - 12/17
+- No Development: Project Terminated
+
+#### Features Not Implemented:
+- Role Based Access Control
+- Additional website pages.
+- Role-based interface elements.
