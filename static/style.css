@@ -274,6 +274,7 @@ select {
 /* Custom Column Definitions */
 .model-list-container.short{width: 50%}
 .model-item.course{ grid-template-columns: 1fr 1fr 3fr 3fr 1.5fr 0.5fr; }
+.model-item.register{ grid-template-columns: 0.5fr 1fr 1fr 3fr 3fr 1.5fr 0.5fr; }
 .model-item.user{ grid-template-columns: 1fr 1.5fr 2fr 2.5fr; }
 .model-item.role{ grid-template-columns: 1fr 2fr; }
 
